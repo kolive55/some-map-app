@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+function initMap() {
+  var Ferris = {lat: 48.426908, lng: -123.369007};
+  var Pags = {lat:48.424413, lng:-123.366483};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 18,
+    center: Ferris
+  });
+
+  var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Ferris\'</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Ferris\'</b> Has the best soup!</p>'+
+      '.</p>'+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  var contentString1 = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Pagliacci\'s</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Pagliacci\'s </b>Best pasta in the city</p>'+
+      '.</p>'+
+      '</div>'+
+      '</div>';
+
+  var infowindow1 = new google.maps.InfoWindow({
+    content: contentString1
+  });
+
+  var marker = new google.maps.Marker({
+    position: Ferris,
+    map: map,
+    title: 'Ferris\s',
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  var marker = new google.maps.Marker({
+    position: Pags,
+    map: map,
+    title: 'Pagliacci\'s',
+  });
+
+  marker.addListener('click', function() {
+    infowindow1.open(map, marker);
+  });
+}
+
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?v=3&key=[KEY]&callback=initMap">
+    </script>
+  </body>
+</html>
